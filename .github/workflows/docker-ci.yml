@@ -27,9 +27,11 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: ${{ matrix.platforms }}
+          platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.actor }}/pop_os:24.04
+          tags: |
+            ghcr.io/${{ github.actor }}/pop_os:latest
+            ghcr.io/${{ github.actor }}/pop_os:24.04
           labels: |
             org.opencontainers.image.title=Pop!_OS 24.04
             org.opencontainers.image.description=Pop!_OS Docker Base Image (24.04)
