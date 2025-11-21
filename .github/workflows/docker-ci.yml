@@ -1,0 +1,24 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: ${{ matrix.platforms }}
+          outputs: type=image,name=pop_os,annotation-index.org.opencontainers.image.description=Pop!_OS Docker Base Image (24.04)
+          push: ${{ github.event_name != 'pull_request' }}
+          #tags: ${{ steps.meta.outputs.tags }}
+          #annotations: ${{ steps.meta.outputs.annotations }}
