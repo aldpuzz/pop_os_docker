@@ -18,7 +18,7 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: ${{ matrix.platforms }}
-          outputs: type=image,name=pop_os,annotation-index.org.opencontainers.image.description=Pop!_OS Docker Base Image (24.04)
           push: ${{ github.event_name != 'pull_request' }}
-          #tags: ${{ steps.meta.outputs.tags }}
-          #annotations: ${{ steps.meta.outputs.annotations }}
+          tags: pop_os:24.04
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
